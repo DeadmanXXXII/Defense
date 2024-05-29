@@ -1,0 +1,4 @@
+So you analysts that slave over a remote cloud SOC and you can focus on the more fun things than slaving routines when your under attack or a red op.
+Fill in the placeholders and implement for the specific sections and tools you have.
+zap, Nmap, nessus, snort, surricata, Wireshark, md5house,crackstaion, exploit database, dark stack overflow, windows, Linux, AWS, Azure, GCP 
+all work and connect correctly using the IDE rust up and loaded as a cargo.toml and run once you have configured it correctly to your systems specs.
