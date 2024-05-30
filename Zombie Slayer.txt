@@ -1,0 +1,130 @@
+General purpose:
+### Prerequisites
+
+1. **Install Ruby**: Ensure Ruby is installed on your system. You can download it from [ruby-lang.org](https://www.ruby-lang.org/en/downloads/).
+
+2. **Install Shoes**: Download and install Shoes from [shoesrb.com](http://shoesrb.com/downloads/).
+
+### Step-by-Step Guide
+
+1. **Create the Script File**:
+   - Open a text editor and copy the provided code into it.
+   - Save the file with a `.rb` extension, for example, `zombie_slayer.rb`.
+
+2. **Install Required Gems**:
+   - Open a terminal or command prompt.
+   - Install the `net-ssh` and `socket` gems if they are not already installed by running:
+     ```sh
+     gem install net-ssh
+     gem install socket
+     ```
+
+3. **Run the Script**:
+   - In the terminal, navigate to the directory where you saved `zombie_slayer.rb`.
+   - Run the script using:
+     ```sh
+     shoes zombie_slayer.rb
+     ```
+   - This command will open the Shoes GUI application.
+
+4. **Using the GUI**:
+   - **Authorized IP Addresses**: Enter the IP addresses you want to authorize, separated by commas, in the provided input box.
+   - **Termination Commands**: Enter the commands to terminate connections for SSH and other protocols in the respective input boxes.
+   - **Options**: Select the options you want to enable by checking the corresponding checkboxes.
+   - **Save Settings**: Click the "Save" button to save your settings. An alert will notify you that the settings have been saved.
+
+5. **Defense System Operation**:
+   - The script will start a TCP server that listens for incoming connections.
+   - When a connection is received, it will prompt the user to allow or deny the connection via the client terminal.
+   - If the connection is from an unauthorized IP or is denied by the user, the script will terminate the connection using the provided commands.
+
+### Notes
+
+- **Network Permissions**: Ensure your firewall or network settings allow the script to bind to ports and accept connections.
+- **Testing**: It's advisable to test this setup in a controlled environment before deploying it in a production scenario.
+
+### Example Commands for Termination
+
+Here are example commands for different protocols that you can use:
+
+- **SSH**: `kill $(ps aux | grep '[s]shd' | grep '%IP%' | awk '{print $2}')`
+- **Telnet**: `kill $(ps aux | grep '[t]elnetd' | grep '%IP%' | awk '{print $2}')`
+- **HTTP**: `iptables -A INPUT -s %IP% -p tcp --dport 80 -j DROP`
+- **HTTPS**: `iptables -A INPUT -s %IP% -p tcp --dport 443 -j DROP`
+- **FTP**: `iptables -A INPUT -s %IP% -p tcp --dport 21 -j DROP`
+
+Make sure to replace `%IP%` with the actual IP address in your commands.
+
+Specifically for Kali:
+
+### Prerequisites
+
+1. **Install Ruby**:
+   - Kali Linux comes with Ruby pre-installed. You can verify this by running:
+     ```sh
+     ruby -v
+     ```
+   - If Ruby is not installed, you can install it using:
+     ```sh
+     sudo apt update
+     sudo apt install ruby-full
+     ```
+
+2. **Install Required Gems**:
+   - Open a terminal and install the required gems:
+     ```sh
+     sudo gem install net-ssh
+     sudo gem install socket
+     ```
+
+3. **Install Shoes**:
+   - Download Shoes for Linux from [shoesrb.com](http://shoesrb.com/downloads/). 
+   - Follow the installation instructions provided on the website. Usually, it involves downloading a `.sh` file and running it to install Shoes.
+
+### Step-by-Step Guide
+
+1. **Create the Script File**:
+   - Open a text editor, such as `nano` or `gedit`, and copy the provided code into it.
+   - Save the file with a `.rb` extension, for example, `zombie_slayer.rb`.
+
+2. **Run the Script**:
+   - In the terminal, navigate to the directory where you saved `zombie_slayer.rb`.
+   - Run the script using:
+     ```sh
+     shoes zombie_slayer.rb
+     ```
+   - This command will open the Shoes GUI application.
+
+3. **Using the GUI**:
+   - **Authorized IP Addresses**: Enter the IP addresses you want to authorize, separated by commas, in the provided input box.
+   - **Termination Commands**: Enter the commands to terminate connections for SSH and other protocols in the respective input boxes.
+   - **Options**: Select the options you want to enable by checking the corresponding checkboxes.
+   - **Save Settings**: Click the "Save" button to save your settings. An alert will notify you that the settings have been saved.
+
+4. **Defense System Operation**:
+   - The script will start a TCP server that listens for incoming connections.
+   - When a connection is received, it will prompt the user to allow or deny the connection via the client terminal.
+   - If the connection is from an unauthorized IP or is denied by the user, the script will terminate the connection using the provided commands.
+
+### Example Commands for Termination
+
+Here are example commands for different protocols that you can use:
+
+- **SSH**: `kill $(ps aux | grep '[s]shd' | grep '%IP%' | awk '{print $2}')`
+- **Telnet**: `kill $(ps aux | grep '[t]elnetd' | grep '%IP%' | awk '{print $2}')`
+- **HTTP**: `iptables -A INPUT -s %IP% -p tcp --dport 80 -j DROP`
+- **HTTPS**: `iptables -A INPUT -s %IP% -p tcp --dport 443 -j DROP`
+- **FTP**: `iptables -A INPUT -s %IP% -p tcp --dport 21 -j DROP`
+
+Make sure to replace `%IP%` with the actual IP address in your commands.
+
+### Additional Tips
+
+- **Network Permissions**: Ensure your firewall or network settings allow the script to bind to ports and accept connections.
+- **Testing**: It's advisable to test this setup in a controlled environment before deploying it in a production scenario.
+- **Running with Root Privileges**: Since the script interacts with network settings and potentially critical system processes, you might need to run it with root privileges:
+  ```sh
+  sudo shoes zombie_slayer.rb
+  ```
+
+By following these steps, you should be able to run the script on Kali Linux and use its GUI for managing authorized IPs and termination commands. Adjust the commands and options based on your specific needs and environment.
