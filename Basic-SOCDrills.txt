@@ -1,4 +1,4 @@
-So you analysts that slave over a remote cloud SOC and you can focus on the more fun things than slaving routines when your under attack or a red op.
+For you analysts that slave over a remote cloud SOC and you can focus on the more fun things than simple routines when your under attack or a red op.
 
 Fill in the placeholders and implement for the specific sections and tools you have:
 
