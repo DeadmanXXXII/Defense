@@ -1,132 +1,37 @@
-Prerequisites:
+Step-by-Step Guide:
 
-AWS Organizations: 
-For managing multiple AWS accounts.
+Preparation and Prerequisites:
 
-AWS CloudFormation: 
-For infrastructure as code.
+Ensure you have Terraform, Ansible, and AWS CLI installed on your system.
 
-AWS Systems Manager:
-For instance configuration management.
+Configure AWS CLI:
+If not already configured, run aws configure and follow the prompts to set up your AWS credentials.
 
-Steps:
+Create Ansible Playbook:
+Save the Ansible playbook content provided above to a file named setup_kali.yml.
 
-Automate AWS Account Creation:Use AWS Organizations to create and manage multiple accounts.
+Modify Terraform Script:
+Update the Terraform script (main.tf) with the correct Kali Linux AMI ID, key pair name, and the path to your private key file (/path/to/my-key-pair.pem).
+Adjust the instance count and configurations as needed.
 
-You can use AWS CLI or SDK to script account creation.
-Use AWS CloudFormation to Provision Resources:
+Initialize Terraform:
+Run terraform init in your terminal to initialize Terraform in the directory containing your Terraform script and Ansible playbook.
 
-Define infrastructure using CloudFormation templates.
+Review Terraform Plan (Optional):
+Run terraform plan to see a plan of what Terraform will do. Review the plan to ensure it matches your expectations.
 
-Use AWS Systems Manager for Configuration:
+Apply Terraform Configuration:
+Execute terraform apply to create the specified number of EC2 instances and configure them with Ansible.
+Confirm by typing yes when prompted.
 
-Leverage AWS Systems Manager Automation Documents to install and configure software on your instances.
+Monitor Provisioning:
+Terraform will begin creating the EC2 instances and configuring them with Ansible. 
+Monitor the progress in your terminal.
 
-Step 1: 
+Verify Instances:
+After Terraform completes, verify in the AWS Management Console that the EC2 instances have been created with the specified configurations and tags.
 
-Automate AWS Account Creation
-Use the AWS CLI to create a new AWS account under your organization.
-
-!#bash:
-aws organizations create-account 
---email <email> --account-name 
-<account_name> --role-name <role_name>
-
-Step 2:
-AWS CloudFormation TemplateCreate a CloudFormation template to provision an EC2 instance with the desired configurations.
-
-kali-linux-instance.yaml:
-
-yaml:
-AWSTemplateFormatVersion: '2010-09-09'
-Description: Provision a Kali Linux EC2 instance
-
-Parameters:
-  InstanceType:
-    Description: EC2 instance type
-    Type: String
-    Default: t2.micro
-    AllowedValues:
-      - t2.micro
-      - t2.small
-      - t2.medium
-    ConstraintDescription: Must be a valid EC2 instance type.
-
-Resources:
-  EC2Instance:
-    Type: AWS::EC2::Instance
-    Properties:
-      InstanceType: !Ref InstanceType
-      ImageId: ami-12345678 # Replace with the Kali Linux AMI ID
-      KeyName: my-key-pair # Replace with your key pair
-      Tags:
-        - Key: Name
-          Value: KaliLinuxInstance
-
-Outputs:
-  InstanceId:
-    Description: The instance ID
-    Value: !Ref EC2Instance
-  PublicIP:
-    Description: The public IP address of the EC2 instance
-    Value: !GetAtt EC2Instance.PublicIp
-
-Step 3: 
-AWS Systems Manager AutomationUse AWS Systems Manager to run a document that installs and configures the necessary tools on the instance.
-Create a Systems Manager document for installing tools on Kali Linux.
-
-InstallKaliTools.yaml:
-
-yaml:
----
-schemaVersion: '0.3'
-description: "Install Kali Linux tools"
-mainSteps:
-  - action: aws:runShellScript
-    name: InstallTools
-    inputs:
-      runCommand:
-        - sudo apt-get update
-        - sudo apt-get install -y nmap wireshark metasploit-framework john aircrack-ng
-
-Deploying the Solution:
-Deploy CloudFormation Template:
-Save the CloudFormation template as 
-
-kali-linux-instance.yaml.
-
-Deploy it using the AWS CLI:
-
-!#bash:
-aws cloudformation create-stack --stack-name KaliLinuxStack --template-body file://kali-linux-instance.yaml --parameters ParameterKey=InstanceType,ParameterValue=t2.micro
-
-Run Systems Manager Automation Document:
-Save the Systems Manager document as InstallKaliTools.yaml.
-
-Register the document with Systems Manager:
-
-!#bash:
-aws ssm create-document --name "InstallKaliTools" --document-type "Automation" --content file://InstallKaliTools.yaml
-
-Execute the automation document on the instance:
-
-!#bash:
-INSTANCE_ID=$(aws cloudformation describe-stacks --stack-name KaliLinuxStack --query "Stacks[0].Outputs[?OutputKey=='InstanceId'].OutputValue" --output text)
-aws ssm start-automation-execution --document-name "InstallKaliTools" --parameters "InstanceId=$INSTANCE_ID"
-
-Explanation:
-
-AWS Organizations: 
-Allows centralized management of multiple AWS accounts.
-
-AWS CloudFormation: 
-Defines and provisions infrastructure as code.
-
-AWS Systems Manager: 
-Manages configuration and automation of instances, ensuring they have the required software and configurations.
-
-Security and Compliance:
-IAM Roles and Policies: Ensure that the necessary IAM roles and policies are in place to allow automation tools to interact with AWS services securely.
-
-Secrets Management:
-Use AWS Secrets Manager or AWS Parameter Store for securely storing and accessing sensitive data.
+Access Instances (Optional):
+If needed, SSH into the instances using your private key to verify the configurations and access the deployed tools.
+With this setup, Terraform will handle the creation and configuration of EC2 instances, while Ansible will take care of configuring the instances with the specified tools. 
+Adjust the configurations and playbook tasks as needed for your specific use case.
