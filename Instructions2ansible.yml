@@ -1,0 +1,22 @@
+#setup_kali.yml
+
+---
+- name: Configure Kali Linux
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update and upgrade apt packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Install common tools
+      apt:
+        name:
+          - nmap
+          - wireshark
+          - metasploit-framework
+          - john
+          - aircrack-ng
+        state: present
