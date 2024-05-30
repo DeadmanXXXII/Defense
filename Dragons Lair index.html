@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Security Monitoring Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 50%; margin: 0 auto; }
+        header, footer { text-align: center; margin: 20px 0; }
+        .section { margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The Dragon's Lair</h1>
+            <h2>The reason you should stay behind the fence</h2>
+        </header>
+
+        <div class="section">
+            <h3>Add User</h3>
+            <form id="addUserForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="role">Role:</label>
+                <input type="text" id="role" name="role" required>
+                <button type="submit">Add User</button>
+            </form>
+        </div>
+
+        <div class="section">
+            <h3>Add Super Root Account</h3>
+            <form id="addSuperRootForm">
+                <label for="superUsername">Username:</label>
+                <input type="text" id="superUsername" name="superUsername" required>
+                <label for="superPassword">Password:</label>
+                <input type="password" id="superPassword" name="superPassword" required>
+                <button type="submit">Add Super Root</button>
+            </form>
+        </div>
+
+        <footer>
+            <p>Created by Blu Corbel</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
