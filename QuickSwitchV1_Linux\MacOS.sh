@@ -1,4 +1,5 @@
-1. **Bash (Linux/macOS) with Snort IDS** - quick_switch_snort.sh
+# 1. Bash (Linux/macOS) with Snort IDS
+ - quick_switch_snort.sh
 
 bash
 #!/bin/bash
