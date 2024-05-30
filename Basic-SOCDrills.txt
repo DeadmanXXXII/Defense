@@ -1,7 +1,10 @@
 So you analysts that slave over a remote cloud SOC and you can focus on the more fun things than slaving routines when your under attack or a red op.
-Fill in the placeholders and implement for the specific sections and tools you have.
+
+Fill in the placeholders and implement for the specific sections and tools you have:
+
 zap, Nmap, nessus, snort, surricata, Wireshark, md5house,crackstaion, exploit database, dark stack overflow, windows, Linux, AWS, Azure, GCP 
 all work and connect correctly using the IDE rust up and loaded as a cargo.toml and run once you have configured it correctly to your systems specs.
+
 Here is how to do that in Kali which is how I run these tools.
 
 The provided code for Basic-SOCDrills does indeed feature an interactive GUI using GTK, and it can be run on a Kali Linux system. Here’s how you can set it up and run it:
@@ -85,4 +88,4 @@ The provided code for Basic-SOCDrills does indeed feature an interactive GUI usi
   Each thread runs in an infinite loop, periodically performing its assigned tasks and sleeping for a specific duration between iterations.
 
 ### Summary:
-The provided code sets up a basic security operations center (SOC) drill system with a GTK-based GUI. It includes functions for various security tasks and runs on a multi-threaded architecture. By following the steps outlined above, you can build and run this application on Kali Linux.
+The provided code sets up a basic security operations center (SOC) drill system with a GTK-based GUI. It includes functions for various security tasks and runs on a multi-threaded architecture. By following the steps outlined above, you can build and run this application in Kali Linux.
