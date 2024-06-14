@@ -335,6 +335,13 @@ def main():
     encryption_app = EncryptionApp(root)
     decryption_app = DecryptionApp(root)
 
+    # Add headers and footers
+    header_label = tk.Label(root, text="Labyrinth - File Encryption and Decryption Tool", font=("Helvetica", 16, "bold"))
+    header_label.pack()
+
+    footer_label = tk.Label(root, text="Created by Blu Corbel", font=("Helvetica", 10))
+    footer_label.pack(side="bottom")
+
     # Display both windows
     encryption_app.master.geometry("500x400+100+100")
     decryption_app.master.geometry("500x400+700+100")
