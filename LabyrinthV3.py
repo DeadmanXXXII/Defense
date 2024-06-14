@@ -331,13 +331,15 @@ class DecryptionApp:
 def main():
     root = tk.Tk()
 
+        # Add headers and footers
+    header_label = tk.Label(root, text="Labyrinth - File Encryption and Decryption Tool", font=("Helvetica", 16, "bold"))
+    header_label.pack()
+
+
     # Create instances of both apps
     encryption_app = EncryptionApp(root)
     decryption_app = DecryptionApp(root)
 
-    # Add headers and footers
-    header_label = tk.Label(root, text="Labyrinth - File Encryption and Decryption Tool", font=("Helvetica", 16, "bold"))
-    header_label.pack()
 
     footer_label = tk.Label(root, text="Created by Blu Corbel", font=("Helvetica", 10))
     footer_label.pack(side="bottom")
