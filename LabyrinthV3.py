@@ -296,10 +296,10 @@ def main():
     decryption_app = DecryptionApp(decryption_frame)
 
     # Add header and footer labels
-    header_label = tk.Label(root, text="File Encryption and Decryption Tool", font=("Helvetica", 16, "bold"))
+    header_label = tk.Label(root, text="Labyrinth The File Encryption and Decryption Tool", font=("Helvetica", 14, "bold"))
     header_label.pack(side="top", pady=10)
 
-    footer_label = tk.Label(root, text="Created by Your Name", font=("Helvetica", 10))
+    footer_label = tk.Label(root, text="Created by Blu Corbel", font=("Helvetica", 10))
     footer_label.pack(side="bottom", pady=10)
 
     root.mainloop()
