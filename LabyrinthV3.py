@@ -258,8 +258,9 @@ class DecryptionApp:
             self.decrypt_observer.stop()
             self.decrypt_observer.join()
 
-            self.decrypt_label.config(text="Handler Status: Stopped")
-            self.start_button.config(state=tk.NORMAL)
+            self.decrypt_label.config(text="Handler Status: Running")
+
+self.start_button.config(state=tk.NORMAL)
             self.stop_button.config(state=tk.DISABLED)
 
     def load_key(self):
@@ -267,6 +268,12 @@ class DecryptionApp:
             return f.read()
 
     def decrypt_files_manually(self):
+        paths = filedialog.askopenfilenames()
+        if paths:
+            self.handler.decrypt_group_files(paths)
+            messagebox.showinfo("Decryption", "Files decrypted successfully.")
+
+    def decrypt_group_files(self):
         paths = filedialog.askopenfilenames()
         if paths:
             self.handler.decrypt_group_files(paths)
