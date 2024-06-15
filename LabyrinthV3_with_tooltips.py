@@ -420,4 +420,8 @@ if __name__ == "__main__":
     EncryptionApp(encryption_frame)
     DecryptionApp(decryption_frame)
 
+
+    footer_label = tk.Label(root, text="Created by Blu Corbel", font=("Helvetica", 10))
+    footer_label.pack(side="bottom")
+
     root.mainloop()
