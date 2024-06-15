@@ -164,58 +164,58 @@ class EncryptionApp:
 
         # Encryption GUI elements
         self.label1 = tk.Label(master, text="Select a directory to monitor:")
-        self.label1.grid(row=0, column=0, pady=5, padx=10, sticky="w")
+        self.label1.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.directory_button = tk.Button(master, text="Select Directory", command=self.select_directory)
-        self.directory_button.grid(row=1, column=0, pady=5, padx=10, sticky="w")
+        self.directory_button.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W)
         CreateToolTip(self.directory_button, "Click to select the directory to monitor")
 
         self.label2 = tk.Label(master, text="Select a key file:")
-        self.label2.grid(row=2, column=0, pady=5, padx=10, sticky="w")
+        self.label2.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.key_button = tk.Button(master, text="Select Key File", command=self.select_key)
-        self.key_button.grid(row=3, column=0, pady=5, padx=10, sticky="w")
+        self.key_button.grid(row=1, column=1, padx=10, pady=10, sticky=tk.W)
         CreateToolTip(self.key_button, "Click to select the key file")
 
         self.label3 = tk.Label(master, text="Select trigger for encryption:")
-        self.label3.grid(row=4, column=0, pady=5, padx=10, sticky="w")
+        self.label3.grid(row=2, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.encrypt_trigger = tk.StringVar()
         self.encrypt_trigger.set("Create")
         self.encrypt_trigger_menu = tk.OptionMenu(master, self.encrypt_trigger, "Create", "Delete", "Modify")
-        self.encrypt_trigger_menu.grid(row=5, column=0, pady=5, padx=10, sticky="w")
+        self.encrypt_trigger_menu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
         CreateToolTip(self.encrypt_trigger_menu, "Select when encryption should trigger")
 
         self.label4 = tk.Label(master, text="Select encryption mode:")
-        self.label4.grid(row=6, column=0, pady=5, padx=10, sticky="w")
+        self.label4.grid(row=3, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.encrypt_mode = tk.StringVar()
         self.encrypt_mode.set("Individual")
-        self.encrypt_mode_menu = tk.OptionMenu(master, self.encrypt_mode, "Individual", "Group", "All", command=self.toggle_group_entry_encrypt)
-        self.encrypt_mode_menu.grid(row=7, column=0, pady=5, padx=10, sticky="w")
+        self.encrypt_mode_menu = tk.OptionMenu(master, self.encrypt_mode, "Individual", "Group", "All", command=self.toggle_group_entry)
+        self.encrypt_mode_menu.grid(row=3, column=1, padx=10, pady=10, sticky=tk.W)
         CreateToolTip(self.encrypt_mode_menu, "Select how files should be encrypted")
 
         self.label5 = tk.Label(master, text="Enter group paths (comma-separated):")
-        self.label5.grid(row=8, column=0, pady=5, padx=10, sticky="w")
+        self.label5.grid(row=4, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.group_paths_entry = tk.Entry(master, width=50)
-        self.group_paths_entry.grid(row=9, column=0, pady=5, padx=10, sticky="w")
+        self.group_paths_entry.grid(row=4, column=1, padx=10, pady=10, sticky=tk.W)
         self.group_paths_entry.config(state=tk.DISABLED)
         CreateToolTip(self.group_paths_entry, "Enter paths for group encryption (comma-separated)")
 
         self.encrypt_label = tk.Label(master, text="Encryption Handler Status: Idle")
-        self.encrypt_label.grid(row=10, column=0, pady=5, padx=10, sticky="w")
+        self.encrypt_label.grid(row=5, column=0, columnspan=2, padx=10, pady=10, sticky=tk.W)
 
         self.start_button = tk.Button(master, text="Start Monitoring", command=self.start_monitoring)
-        self.start_button.grid(row=11, column=0, pady=5, padx=10, sticky="w")
+        self.start_button.grid(row=6, column=0, padx=10, pady=10, sticky=tk.W)
         CreateToolTip(self.start_button, "Start monitoring the selected directory for encryption")
 
         self.stop_button = tk.Button(master, text="Stop Monitoring", command=self.stop_monitoring, state=tk.DISABLED)
-        self.stop_button.grid(row=12, column=0, pady=5, padx=10, sticky="w")
+        self.stop_button.grid(row=6, column=1, padx=10, pady=10, sticky=tk.W)
         CreateToolTip(self.stop_button, "Stop monitoring the selected directory")
 
     # Method to toggle group paths entry
-    def toggle_group_entry_encrypt(self, mode):
+    def toggle_group_entry(self, mode):
         if mode == "Group":
             self.group_paths_entry.config(state=tk.NORMAL)
         else:
@@ -271,58 +271,58 @@ class DecryptionApp:
 
         # Decryption GUI elements
         self.label1 = tk.Label(master, text="Select a directory to monitor:")
-        self.label1.grid(row=0, column=1, pady=5, padx=10, sticky="w")
+        self.label1.grid(row=0, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.directory_button = tk.Button(master, text="Select Directory", command=self.select_directory)
-        self.directory_button.grid(row=1, column=1, pady=5, padx=10, sticky="w")
+        self.directory_button.grid(row=0, column=1, padx=10, pady=10, sticky=tk.W)
         CreateToolTip(self.directory_button, "Click to select the directory to monitor")
 
         self.label2 = tk.Label(master, text="Select a key file:")
-        self.label2.grid(row=2, column=1, pady=5, padx=10, sticky="w")
+        self.label2.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.key_button = tk.Button(master, text="Select Key File", command=self.select_key)
-        self.key_button.grid(row=3, column=1, pady=5, padx=10, sticky="w")
+        self.key_button.grid(row=1, column=1, padx=10, pady=10, sticky=tk.W)
         CreateToolTip(self.key_button, "Click to select the key file")
 
         self.label3 = tk.Label(master, text="Select trigger for decryption:")
-        self.label3.grid(row=4, column=1, pady=5, padx=10, sticky="w")
+        self.label3.grid(row=2, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.decrypt_trigger = tk.StringVar()
         self.decrypt_trigger.set("Create")
         self.decrypt_trigger_menu = tk.OptionMenu(master, self.decrypt_trigger, "Create", "Delete", "Modify")
-        self.decrypt_trigger_menu.grid(row=5, column=1, pady=5, padx=10, sticky="w")
+        self.decrypt_trigger_menu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
         CreateToolTip(self.decrypt_trigger_menu, "Select when decryption should trigger")
 
         self.label4 = tk.Label(master, text="Select decryption mode:")
-        self.label4.grid(row=6, column=1, pady=5, padx=10, sticky="w")
+        self.label4.grid(row=3, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.decrypt_mode = tk.StringVar()
         self.decrypt_mode.set("Individual")
-        self.decrypt_mode_menu = tk.OptionMenu(master, self.decrypt_mode, "Individual", "Group", "All", command=self.toggle_group_entry_decrypt)
-        self.decrypt_mode_menu.grid(row=7, column=1, pady=5, padx=10, sticky="w")
+        self.decrypt_mode_menu = tk.OptionMenu(master, self.decrypt_mode, "Individual", "Group", "All", command=self.toggle_group_entry)
+        self.decrypt_mode_menu.grid(row=3, column=1, padx=10, pady=10, sticky=tk.W)
         CreateToolTip(self.decrypt_mode_menu, "Select how files should be decrypted")
 
         self.label5 = tk.Label(master, text="Enter group paths (comma-separated):")
-        self.label5.grid(row=8, column=1, pady=5, padx=10, sticky="w")
+        self.label5.grid(row=4, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.group_paths_entry = tk.Entry(master, width=50)
-        self.group_paths_entry.grid(row=9, column=1, pady=5, padx=10, sticky="w")
+        self.group_paths_entry.grid(row=4, column=1, padx=10, pady=10, sticky=tk.W)
         self.group_paths_entry.config(state=tk.DISABLED)
         CreateToolTip(self.group_paths_entry, "Enter paths for group decryption (comma-separated)")
 
         self.decrypt_label = tk.Label(master, text="Decryption Handler Status: Idle")
-        self.decrypt_label.grid(row=10, column=1, pady=5, padx=10, sticky="w")
+        self.decrypt_label.grid(row=5, column=0, columnspan=2, padx=10, pady=10, sticky=tk.W)
 
         self.start_button = tk.Button(master, text="Start Monitoring", command=self.start_monitoring)
-        self.start_button.grid(row=11, column=1, pady=5, padx=10, sticky="w")
+        self.start_button.grid(row=6, column=0, padx=10, pady=10, sticky=tk.W)
         CreateToolTip(self.start_button, "Start monitoring the selected directory for decryption")
 
         self.stop_button = tk.Button(master, text="Stop Monitoring", command=self.stop_monitoring, state=tk.DISABLED)
-        self.stop_button.grid(row=12, column=1, pady=5, padx=10, sticky="w")
+        self.stop_button.grid(row=6, column=1, padx=10, pady=10, sticky=tk.W)
         CreateToolTip(self.stop_button, "Stop monitoring the selected directory")
 
     # Method to toggle group paths entry
-    def toggle_group_entry_decrypt(self, mode):
+    def toggle_group_entry(self, mode):
         if mode == "Group":
             self.group_paths_entry.config(state=tk.NORMAL)
         else:
@@ -375,14 +375,18 @@ def main():
 
     # Add headers and footers
     header_label = tk.Label(root, text="Labyrinth - File Encryption and Decryption Tool", font=("Helvetica", 16, "bold"))
-    header_label.grid(row=0, column=0, columnspan=2, pady=10)
+    header_label.pack(padx=20, pady=20)
 
     # Create instances of both apps
     encryption_app = EncryptionApp(root)
     decryption_app = DecryptionApp(root)
 
     footer_label = tk.Label(root, text="Created by Blu Corbel", font=("Helvetica", 10))
-    footer_label.grid(row=13, column=0, columnspan=2, sticky="e", pady=(0, 10))
+    footer_label.pack(side="bottom", padx=20, pady=10, anchor="w")
+
+    # Display both windows
+    encryption_app.master.geometry("600x400+100+100")
+    decryption_app.master.geometry("600x400+750+100")
 
     root.mainloop()
 
