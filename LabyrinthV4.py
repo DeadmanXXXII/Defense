@@ -160,7 +160,7 @@ class DecryptionHandler(FileSystemEventHandler):
 class EncryptionApp:
     def __init__(self, master):
         self.master = master
-        master.title("Labyrinth - Encryption")
+        master.title("Labyrinth - Encryption & Decryption")
 
         # Encryption GUI elements
         self.encryption_frame = tk.Frame(master)
@@ -229,8 +229,7 @@ class EncryptionApp:
     # Method to select a directory
     def select_directory(self):
         self.directory = filedialog.askdirectory()
-
-self.directory_button.config(text="Selected Directory: " + self.directory)
+        self.directory_button.config(text="Selected Directory: " + self.directory)
 
     # Method to select a key file
     def select_key(self):
@@ -273,7 +272,7 @@ self.directory_button.config(text="Selected Directory: " + self.directory)
 class DecryptionApp:
     def __init__(self, master):
         self.master = master
-        master.title("Labyrinth - Decryption")
+        master.title("Labyrinth - Encryption & Decryption")
 
         # Decryption GUI elements
         self.decryption_frame = tk.Frame(master)
