@@ -382,11 +382,7 @@ def main():
     decryption_app = DecryptionApp(root)
 
     footer_label = tk.Label(root, text="Created by Blu Corbel", font=("Helvetica", 10))
-    footer_label.grid(row=3, column=0, columnspan=2, pady=10, sticky="se")
-
-    # Display both windows
-    encryption_app.master.geometry("600x400+100+100")
-    decryption_app.master.geometry("600x400+700+100")
+    footer_label.grid(row=13, column=0, columnspan=2, sticky="e", pady=(0, 10))
 
     root.mainloop()
 
