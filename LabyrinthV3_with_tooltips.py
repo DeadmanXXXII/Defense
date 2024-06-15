@@ -396,6 +396,12 @@ self.stop_button.config(state=tk.DISABLED)
 if __name__ == "__main__":
     root = tk.Tk()
 
+
+        # Add headers and footers
+    header_label = tk.Label(root, text="Labyrinth - File Encryption and Decryption Tool", font=("Helvetica", 16, "bold"))
+    header_label.pack()
+
+
     # Create the notebook
     notebook = ttk.Notebook(root)
     notebook.pack(pady=10, expand=True)
