@@ -1,9 +1,13 @@
+import os
 import tkinter as tk
-from tkinter import filedialog, messagebox, ttk
+from tkinter import filedialog
+from tkinter import messagebox
+from tkinter import ttk
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from cryptography.fernet import Fernet
-import os
+
+
 
 class EncryptionHandler(FileSystemEventHandler):
     def __init__(self, key, trigger, mode, directory, groups):
@@ -61,6 +65,7 @@ class EncryptionHandler(FileSystemEventHandler):
                 if not file_path.endswith(".encrypted"):
                     self.encrypt_file(file_path)
 
+
 class DecryptionHandler(FileSystemEventHandler):
     def __init__(self, key, trigger, mode, directory, groups):
         super().__init__()
@@ -117,6 +122,7 @@ class DecryptionHandler(FileSystemEventHandler):
                 if file_path.endswith(".encrypted"):
                     self.decrypt_file(file_path)
 
+
 class EncryptionApp:
     def __init__(self, master):
         self.master = master
@@ -146,7 +152,8 @@ class EncryptionApp:
         self.encrypt_trigger.set("Create")
         self.encrypt_trigger_menu = tk.OptionMenu(master, self.encrypt_trigger, "Create", "Delete", "Modify")
         self.encrypt_trigger_menu.pack()
-        add_tooltip(self.encrypt_trigger_menu, "Select the trigger event for encryption (e.g., file creation, deletion, or modification).")
+        add_tooltip(self.encrypt_trigger_menu,
+                    "Select the trigger event for encryption (e.g., file creation, deletion, or modification).")
 
         self.label4 = tk.Label(master, text="Select encryption mode:")
         self.label4.pack()
@@ -154,7 +161,8 @@ class EncryptionApp:
 
         self.encrypt_mode = tk.StringVar()
         self.encrypt_mode.set("Individual")
-        self.encrypt_mode_menu = tk.OptionMenu(master, self.encrypt_mode, "Individual", "Group", "All", command=self.toggle_group_entry)
+        self.encrypt_mode_menu = tk.OptionMenu(master, self.encrypt_mode, "Individual", "Group", "All",
+                                               command=self.toggle_group_entry)
         self.encrypt_mode_menu.pack()
         add_tooltip(self.encrypt_mode_menu, "Select the mode of encryption (e.g., Individual, Group, or All).")
 
@@ -196,7 +204,8 @@ class EncryptionApp:
     def start_monitoring(self):
         if hasattr(self, 'directory') and hasattr(self, 'key_file'):
             groups = self.group_paths_entry.get().split(',') if self.encrypt_mode.get() == "Group" else None
-            self.handler = EncryptionHandler(self.load_key(), self.encrypt_trigger.get(), self.encrypt_mode.get(), self.directory, groups)
+            self.handler = EncryptionHandler(self.load_key(), self.encrypt_trigger.get(), self.encrypt_mode.get(),
+                                             self.directory, groups)
 
             self.encrypt_observer = Observer()
             self.encrypt_observer.schedule(self.handler, self.directory, recursive=True)
@@ -221,10 +230,11 @@ class EncryptionApp:
         with open(self.key_file, "rb") as f:
             return f.read()
 
+
 class DecryptionApp:
     def __init__(self, master):
         self.master = master
-        master.title("Labyrinth - Decryption")
+        master.title("Labyrinth - Encryption & Decryption")
 
         self.label1 = tk.Label(master, text="Select a directory to monitor:")
         self.label1.pack()
@@ -250,7 +260,8 @@ class DecryptionApp:
         self.decrypt_trigger.set("Create")
         self.decrypt_trigger_menu = tk.OptionMenu(master, self.decrypt_trigger, "Create", "Delete", "Modify")
         self.decrypt_trigger_menu.pack()
-        add_tooltip(self.decrypt_trigger_menu, "Select the trigger event for decryption (e.g., file creation, deletion, or modification).")
+        add_tooltip(self.decrypt_trigger_menu,
+                    "Select the trigger event for decryption (e.g., file creation, deletion, or modification).")
 
         self.label4 = tk.Label(master, text="Select decryption mode:")
         self.label4.pack()
@@ -258,7 +269,8 @@ class DecryptionApp:
 
         self.decrypt_mode = tk.StringVar()
         self.decrypt_mode.set("Individual")
-        self.decrypt_mode_menu = tk.OptionMenu(master, self.decrypt_mode, "Individual", "Group", "All", command=self.toggle_group_entry)
+        self.decrypt_mode_menu = tk.OptionMenu(master, self.decrypt_mode, "Individual", "Group", "All",
+                                               command=self.toggle_group_entry)
         self.decrypt_mode_menu.pack()
         add_tooltip(self.decrypt_mode_menu, "Select the mode of decryption (e.g., Individual, Group, or All).")
 
@@ -300,7 +312,8 @@ class DecryptionApp:
     def start_monitoring(self):
         if hasattr(self, 'directory') and hasattr(self, 'key_file'):
             groups = self.group_paths_entry.get().split(',') if self.decrypt_mode.get() == "Group" else None
-            self.handler = DecryptionHandler(self.load_key(), self.decrypt_trigger.get(), self.decrypt_mode.get(), self.directory, groups)
+            self.handler = DecryptionHandler(self.load_key(), self.decrypt_trigger.get(), self.decrypt_mode.get(),
+                                             self.directory, groups)
 
             self.decrypt_observer = Observer()
             self.decrypt_observer.schedule(self.handler, self.directory, recursive=True)
@@ -325,8 +338,10 @@ class DecryptionApp:
         with open(self.key_file, "rb") as f:
             return f.read()
 
+
 def add_tooltip(widget, text):
     tooltip = CreateToolTip(widget, text)
+
 
 class CreateToolTip(object):
     def __init__(self, widget, text):
@@ -356,9 +371,14 @@ class CreateToolTip(object):
         if tw:
             tw.destroy()
 
+
 def main():
     root = tk.Tk()
-    root.title("Labyrinth - File Encryption and      Decryption Tool")
+    root.title("Labyrinth - File Encryption and Decryption Tool")  # Set title for the main window
+
+            # Add headers and footers
+    header_label = tk.Label(root, text="Labyrinth - File Encryption and Decryption Tool", font=("Helvetica", 16, "bold"))
+    header_label.pack()
 
     notebook = ttk.Notebook(root)
     notebook.pack(fill='both', expand=True)
@@ -368,8 +388,8 @@ def main():
     notebook.add(encrypt_frame, text="Encryption")
     notebook.add(decrypt_frame, text="Decryption")
 
-    encryption_app = EncryptionApp(encrypt_frame)
-    decryption_app = DecryptionApp(decrypt_frame)
+    encryption_app = EncryptionApp(root)  # Pass root as master instead of encrypt_frame
+    decryption_app = DecryptionApp(root)  # Pass root as master instead of decrypt_frame
 
     footer_label = tk.Label(root, text="Created by Blu Corbel", font=("Helvetica", 10))
     footer_label.pack(side="bottom")
