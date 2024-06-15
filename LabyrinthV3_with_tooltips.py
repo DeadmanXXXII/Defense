@@ -160,7 +160,7 @@ class DecryptionHandler(FileSystemEventHandler):
 class EncryptionApp:
     def __init__(self, master):
         self.master = master
-        master.title("Labyrinth - Encryption")
+        master.title("Labyrinth - Encryption & Decryption")
 
         # Encryption GUI elements
         self.label1 = tk.Label(master, text="Select a directory to monitor:")
@@ -267,7 +267,7 @@ class EncryptionApp:
 class DecryptionApp:
     def __init__(self, master):
         self.master = master
-        master.title("Labyrinth - Decryption")
+        master.title("Labyrinth - Encryption & Decryption")
 
         # Decryption GUI elements
         self.label1 = tk.Label(master, text="Select a directory to monitor:")
@@ -393,3 +393,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
