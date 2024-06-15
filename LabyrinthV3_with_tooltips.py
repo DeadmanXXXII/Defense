@@ -358,23 +358,23 @@ class CreateToolTip(object):
 
 def main():
     root = tk.Tk()
-root.title("Labyrinth - File Encryption and Decryption Tool")
+    root.title("Labyrinth - File Encryption and      Decryption Tool")
 
-notebook = ttk.Notebook(root)
-notebook.pack(fill='both', expand=True)
+    notebook = ttk.Notebook(root)
+    notebook.pack(fill='both', expand=True)
 
-encrypt_frame = tk.Frame(notebook)
-decrypt_frame = tk.Frame(notebook)
-notebook.add(encrypt_frame, text="Encryption")
-notebook.add(decrypt_frame, text="Decryption")
+    encrypt_frame = tk.Frame(notebook)
+    decrypt_frame = tk.Frame(notebook)
+    notebook.add(encrypt_frame, text="Encryption")
+    notebook.add(decrypt_frame, text="Decryption")
 
-encryption_app = EncryptionApp(encrypt_frame)
-decryption_app = DecryptionApp(decrypt_frame)
+    encryption_app = EncryptionApp(encrypt_frame)
+    decryption_app = DecryptionApp(decrypt_frame)
 
-footer_label = tk.Label(root, text="Created by Blu Corbel", font=("Helvetica", 10))
-footer_label.pack(side="bottom")
+    footer_label = tk.Label(root, text="Created by Blu Corbel", font=("Helvetica", 10))
+    footer_label.pack(side="bottom")
 
-root.mainloop()
+    root.mainloop()
 
 if __name__ == "__main__":
     main()
