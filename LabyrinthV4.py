@@ -163,58 +163,60 @@ class EncryptionApp:
         master.title("Labyrinth - Encryption")
 
         # Encryption GUI elements
-        self.label1 = tk.Label(master, text="Select a directory to monitor:", font=("Helvetica", 12))
-        self.label1.pack(padx=10, pady=(20, 10))
+        self.encryption_frame = tk.Frame(master)
+        self.encryption_frame.pack(side="left", padx=20, pady=(20, 10))
 
-        self.directory_button = tk.Button(master, text="Select Directory", command=self.select_directory, font=("Helvetica", 12), width=20)
-        self.directory_button.pack(padx=10, pady=10)
+        self.label1 = tk.Label(self.encryption_frame, text="Select a directory to monitor:", font=("Helvetica", 12))
+        self.label1.pack()
 
+        self.directory_button = tk.Button(self.encryption_frame, text="Select Directory", command=self.select_directory, font=("Helvetica", 12), width=20)
+        self.directory_button.pack(pady=10)
         CreateToolTip(self.directory_button, "Click to select the directory to monitor")
 
-        self.label2 = tk.Label(master, text="Select a key file:", font=("Helvetica", 12))
-        self.label2.pack(padx=10, pady=10)
+        self.label2 = tk.Label(self.encryption_frame, text="Select a key file:", font=("Helvetica", 12))
+        self.label2.pack()
 
-        self.key_button = tk.Button(master, text="Select Key File", command=self.select_key, font=("Helvetica", 12), width=20)
-        self.key_button.pack(padx=10, pady=10)
+        self.key_button = tk.Button(self.encryption_frame, text="Select Key File", command=self.select_key, font=("Helvetica", 12), width=20)
+        self.key_button.pack(pady=10)
         CreateToolTip(self.key_button, "Click to select the key file")
 
-        self.label3 = tk.Label(master, text="Select trigger for encryption:", font=("Helvetica", 12))
-        self.label3.pack(padx=10, pady=10)
+        self.label3 = tk.Label(self.encryption_frame, text="Select trigger for encryption:", font=("Helvetica", 12))
+        self.label3.pack()
 
         self.encrypt_trigger = tk.StringVar()
         self.encrypt_trigger.set("Create")
-        self.encrypt_trigger_menu = tk.OptionMenu(master, self.encrypt_trigger, "Create", "Delete", "Modify")
+        self.encrypt_trigger_menu = tk.OptionMenu(self.encryption_frame, self.encrypt_trigger, "Create", "Delete", "Modify")
         self.encrypt_trigger_menu.config(font=("Helvetica", 12), width=17)
-        self.encrypt_trigger_menu.pack(padx=10, pady=10)
+        self.encrypt_trigger_menu.pack(pady=10)
         CreateToolTip(self.encrypt_trigger_menu, "Select when encryption should trigger")
 
-        self.label4 = tk.Label(master, text="Select encryption mode:", font=("Helvetica", 12))
-        self.label4.pack(padx=10, pady=10)
+        self.label4 = tk.Label(self.encryption_frame, text="Select encryption mode:", font=("Helvetica", 12))
+        self.label4.pack()
 
         self.encrypt_mode = tk.StringVar()
         self.encrypt_mode.set("Individual")
-        self.encrypt_mode_menu = tk.OptionMenu(master, self.encrypt_mode, "Individual", "Group", "All", command=self.toggle_group_entry)
+        self.encrypt_mode_menu = tk.OptionMenu(self.encryption_frame, self.encrypt_mode, "Individual", "Group", "All", command=self.toggle_group_entry)
         self.encrypt_mode_menu.config(font=("Helvetica", 12), width=17)
-        self.encrypt_mode_menu.pack(padx=10, pady=10)
+        self.encrypt_mode_menu.pack(pady=10)
         CreateToolTip(self.encrypt_mode_menu, "Select how files should be encrypted")
 
-        self.label5 = tk.Label(master, text="Enter group paths (comma-separated):", font=("Helvetica", 12))
-        self.label5.pack(padx=10, pady=10)
+        self.label5 = tk.Label(self.encryption_frame, text="Enter group paths (comma-separated):", font=("Helvetica", 12))
+        self.label5.pack()
 
-        self.group_paths_entry = tk.Entry(master, width=50, font=("Helvetica", 12))
-        self.group_paths_entry.pack(padx=10, pady=10)
+        self.group_paths_entry = tk.Entry(self.encryption_frame, width=50, font=("Helvetica", 12))
+        self.group_paths_entry.pack(pady=10)
         self.group_paths_entry.config(state=tk.DISABLED)
         CreateToolTip(self.group_paths_entry, "Enter paths for group encryption (comma-separated)")
 
-        self.encrypt_label = tk.Label(master, text="Encryption Handler Status: Idle", font=("Helvetica", 12))
-        self.encrypt_label.pack(padx=10, pady=10)
+        self.encrypt_label = tk.Label(self.encryption_frame, text="Encryption Handler Status: Idle", font=("Helvetica", 12))
+        self.encrypt_label.pack(pady=10)
 
-        self.start_button = tk.Button(master, text="Start Monitoring", command=self.start_monitoring, font=("Helvetica", 12), width=20)
-        self.start_button.pack(padx=10, pady=10)
+        self.start_button = tk.Button(self.encryption_frame, text="Start Monitoring", command=self.start_monitoring, font=("Helvetica", 12), width=20)
+        self.start_button.pack(pady=10)
         CreateToolTip(self.start_button, "Start monitoring the selected directory for encryption")
 
-        self.stop_button = tk.Button(master, text="Stop Monitoring", command=self.stop_monitoring, state=tk.DISABLED, font=("Helvetica", 12), width=20)
-        self.stop_button.pack(padx=10, pady=10)
+        self.stop_button = tk.Button(self.encryption_frame, text="Stop Monitoring", command=self.stop_monitoring, state=tk.DISABLED, font=("Helvetica", 12), width=20)
+        self.stop_button.pack(pady=10)
         CreateToolTip(self.stop_button, "Stop monitoring the selected directory")
 
     # Method to toggle group paths entry
@@ -227,7 +229,8 @@ class EncryptionApp:
     # Method to select a directory
     def select_directory(self):
         self.directory = filedialog.askdirectory()
-        self.directory_button.config(text="Selected Directory: " + self.directory)
+
+self.directory_button.config(text="Selected Directory: " + self.directory)
 
     # Method to select a key file
     def select_key(self):
@@ -273,57 +276,60 @@ class DecryptionApp:
         master.title("Labyrinth - Decryption")
 
         # Decryption GUI elements
-        self.label1 = tk.Label(master, text="Select a directory to monitor:", font=("Helvetica", 12))
-        self.label1.pack(padx=10, pady=(20, 10))
+        self.decryption_frame = tk.Frame(master)
+        self.decryption_frame.pack(side="right", padx=20, pady=(20, 10))
 
-        self.directory_button = tk.Button(master, text="Select Directory", command=self.select_directory, font=("Helvetica", 12), width=20)
-        self.directory_button.pack(padx=10, pady=10)
+        self.label1 = tk.Label(self.decryption_frame, text="Select a directory to monitor:", font=("Helvetica", 12))
+        self.label1.pack()
+
+        self.directory_button = tk.Button(self.decryption_frame, text="Select Directory", command=self.select_directory, font=("Helvetica", 12), width=20)
+        self.directory_button.pack(pady=10)
         CreateToolTip(self.directory_button, "Click to select the directory to monitor")
 
-        self.label2 = tk.Label(master, text="Select a key file:", font=("Helvetica", 12))
-        self.label2.pack(padx=10, pady=10)
+        self.label2 = tk.Label(self.decryption_frame, text="Select a key file:", font=("Helvetica", 12))
+        self.label2.pack()
 
-        self.key_button = tk.Button(master, text="Select Key File", command=self.select_key, font=("Helvetica", 12), width=20)
-        self.key_button.pack(padx=10, pady=10)
+        self.key_button = tk.Button(self.decryption_frame, text="Select Key File", command=self.select_key, font=("Helvetica", 12), width=20)
+        self.key_button.pack(pady=10)
         CreateToolTip(self.key_button, "Click to select the key file")
 
-        self.label3 = tk.Label(master, text="Select trigger for decryption:", font=("Helvetica", 12))
-        self.label3.pack(padx=10, pady=10)
+        self.label3 = tk.Label(self.decryption_frame, text="Select trigger for decryption:", font=("Helvetica", 12))
+        self.label3.pack()
 
         self.decrypt_trigger = tk.StringVar()
         self.decrypt_trigger.set("Create")
-        self.decrypt_trigger_menu = tk.OptionMenu(master, self.decrypt_trigger, "Create", "Delete", "Modify")
+        self.decrypt_trigger_menu = tk.OptionMenu(self.decryption_frame, self.decrypt_trigger, "Create", "Delete", "Modify")
         self.decrypt_trigger_menu.config(font=("Helvetica", 12), width=17)
-        self.decrypt_trigger_menu.pack(padx=10, pady=10)
+        self.decrypt_trigger_menu.pack(pady=10)
         CreateToolTip(self.decrypt_trigger_menu, "Select when decryption should trigger")
 
-        self.label4 = tk.Label(master, text="Select decryption mode:", font=("Helvetica", 12))
-        self.label4.pack(padx=10, pady=10)
+        self.label4 = tk.Label(self.decryption_frame, text="Select decryption mode:", font=("Helvetica", 12))
+        self.label4.pack()
 
         self.decrypt_mode = tk.StringVar()
         self.decrypt_mode.set("Individual")
-        self.decrypt_mode_menu = tk.OptionMenu(master, self.decrypt_mode, "Individual", "Group", "All", command=self.toggle_group_entry)
+        self.decrypt_mode_menu = tk.OptionMenu(self.decryption_frame, self.decrypt_mode, "Individual", "Group", "All", command=self.toggle_group_entry)
         self.decrypt_mode_menu.config(font=("Helvetica", 12), width=17)
-        self.decrypt_mode_menu.pack(padx=10, pady=10)
+        self.decrypt_mode_menu.pack(pady=10)
         CreateToolTip(self.decrypt_mode_menu, "Select how files should be decrypted")
 
-        self.label5 = tk.Label(master, text="Enter group paths (comma-separated):", font=("Helvetica", 12))
-        self.label5.pack(padx=10, pady=10)
+        self.label5 = tk.Label(self.decryption_frame, text="Enter group paths (comma-separated):", font=("Helvetica", 12))
+        self.label5.pack()
 
-        self.group_paths_entry = tk.Entry(master, width=50, font=("Helvetica", 12))
-        self.group_paths_entry.pack(padx=10, pady=10)
+        self.group_paths_entry = tk.Entry(self.decryption_frame, width=50, font=("Helvetica", 12))
+        self.group_paths_entry.pack(pady=10)
         self.group_paths_entry.config(state=tk.DISABLED)
         CreateToolTip(self.group_paths_entry, "Enter paths for group decryption (comma-separated)")
 
-        self.decrypt_label = tk.Label(master, text="Decryption Handler Status: Idle", font=("Helvetica", 12))
-        self.decrypt_label.pack(padx=10, pady=10)
+        self.decrypt_label = tk.Label(self.decryption_frame, text="Decryption Handler Status: Idle", font=("Helvetica", 12))
+        self.decrypt_label.pack(pady=10)
 
-        self.start_button = tk.Button(master, text="Start Monitoring", command=self.start_monitoring, font=("Helvetica", 12), width=20)
-        self.start_button.pack(padx=10, pady=10)
+        self.start_button = tk.Button(self.decryption_frame, text="Start Monitoring", command=self.start_monitoring, font=("Helvetica", 12), width=20)
+        self.start_button.pack(pady=10)
         CreateToolTip(self.start_button, "Start monitoring the selected directory for decryption")
 
-        self.stop_button = tk.Button(master, text="Stop Monitoring", command=self.stop_monitoring, state=tk.DISABLED, font=("Helvetica", 12), width=20)
-        self.stop_button.pack(padx=10, pady=10)
+        self.stop_button = tk.Button(self.decryption_frame, text="Stop Monitoring", command=self.stop_monitoring, state=tk.DISABLED, font=("Helvetica", 12), width=20)
+        self.stop_button.pack(pady=10)
         CreateToolTip(self.stop_button, "Stop monitoring the selected directory")
 
     # Method to toggle group paths entry
@@ -380,18 +386,18 @@ def main():
 
     # Add headers and footers
     header_label = tk.Label(root, text="Labyrinth - File Encryption and Decryption Tool", font=("Helvetica", 16, "bold"))
-    header_label.pack(pady=(20, 10))
+    header_label.pack(pady=20)
 
     # Create instances of both apps
     encryption_app = EncryptionApp(root)
     decryption_app = DecryptionApp(root)
 
     footer_label = tk.Label(root, text="Created by Blu Corbel", font=("Helvetica", 10))
-    footer_label.pack(side="bottom", pady=(10, 20))
+    footer_label.pack(side="bottom", pady=10)
 
-    # Display both windows
-    encryption_app.master.geometry("600x500+100+100")
-    decryption_app.master.geometry("600x500+800+100")
+    # Center both frames
+    encryption_app.master.geometry("+100+100")
+    decryption_app.master.geometry("+700+100")
 
     root.mainloop()
 
