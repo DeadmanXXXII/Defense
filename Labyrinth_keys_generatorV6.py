@@ -5,10 +5,10 @@ from cryptography.fernet import Fernet
 class KeyGeneratorApp:
     def __init__(self, master):
         self.master = master
-        self.master.title("Key Generator")
+        self.master.title("LabyrinthV6 Key Generator")
 
         # Header Label
-        self.header_label = tk.Label(master, text="Labyrinth Key", font=("Helvetica", 16, "bold"))
+        self.header_label = tk.Label(master, text="LabyrinthV6 Key Generator", font=("Helvetica", 16, "bold"))
         self.header_label.pack(pady=10)
 
         self.label = tk.Label(master, text="Click 'Generate Key' to create a new key.")
