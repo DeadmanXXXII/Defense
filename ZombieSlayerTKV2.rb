@@ -76,6 +76,8 @@ class ZombieSlayer
     client.close
   end
 
+  public
+
   def open_gui
     root = TkRoot.new { title "Zombie Slayer" }
     root.minsize(600, 400)
