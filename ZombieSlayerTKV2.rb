@@ -166,5 +166,5 @@ zombie_slayer = ZombieSlayer.new
 # Start the defense system in a separate thread
 Thread.new { zombie_slayer.start_defense_system }
 
-# Open the GUI for settings configuration
+# Open the GUI for settings configuraton
 zombie_slayer.open_gui
