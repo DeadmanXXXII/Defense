@@ -1,0 +1,4 @@
+# requirements.txt
+
+# GTK+ 3.0 bindings for Python
+python3-gi
