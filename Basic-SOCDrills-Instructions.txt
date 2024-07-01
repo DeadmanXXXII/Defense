@@ -1,0 +1,197 @@
+Basic-SOCDrills Instructions
+For Analysts Working in a Remote SOC
+Introduction
+Welcome to the Basic-SOCDrills tool. 
+This script is designed to automate various security operations center (SOC) tasks, helping you manage security drills, perform system checks, and handle incident responses. 
+This guide will help you set up the tool on a Kali Linux system, integrate it with essential security tools, and configure it for various environments such as Linux, Windows, AWS, Azure, and GCP.
+
+1. Prerequisites
+Before setting up the Basic-SOCDrills tool, ensure you have the following prerequisites:
+
+1.1. Install Python and GTK Development Libraries
+The Basic-SOCDrills tool is written in Python and uses GTK for the graphical user interface. Install Python 3 and the GTK development libraries:
+
+bash
+Copy code
+sudo apt update
+sudo apt install -y python3 python3-gi libgtk-3-dev
+1.2. Install Essential Security Tools
+The tool relies on several security tools. Install them with the following commands:
+
+bash
+Copy code
+sudo apt install -y clamav nmap macchanger logrotate suricata lynis
+Here's a brief overview of each tool's purpose:
+
+ClamAV: Open-source antivirus engine.
+Nmap: Network scanning and vulnerability detection tool.
+Macchanger: Tool for changing MAC addresses.
+Logrotate: Tool for managing log files.
+Suricata: IDS/IPS for intrusion detection and prevention.
+Lynis: Security auditing tool for Unix-based systems.
+2. Configure Security Tools
+2.1. Configure ClamAV
+Update ClamAV virus definitions to ensure you have the latest updates:
+
+bash
+Copy code
+sudo freshclam
+2.2. Configure Suricata
+Copy the default Suricata configuration file and update it as needed:
+
+bash
+Copy code
+sudo cp /etc/suricata/suricata.yaml /etc/suricata/suricata.yaml.bak
+sudo suricata-update
+Edit the /etc/suricata/suricata.yaml file to match your network environment:
+
+bash
+Copy code
+sudo nano /etc/suricata/suricata.yaml
+Adjust the configuration for network interfaces, rules, and logging based on your requirements.
+
+2.3. Configure Logrotate
+Ensure that logrotate is configured to manage logs for ClamAV, Suricata, and other SOC tools:
+
+bash
+Copy code
+sudo nano /etc/logrotate.conf
+Add or update configurations for log management as needed.
+
+3. Save and Prepare the SOC Tool Script
+3.1. Save the SOC Tool Script
+Create a new file named soc_tool.py and paste the provided SOC tool script into it:
+
+bash
+Copy code
+nano soc_tool.py
+Paste the script content and save the file.
+
+3.2. Make the Script Executable
+Change the permissions to make the script executable:
+
+bash
+Copy code
+chmod +x soc_tool.py
+4. Add Dependencies to requirements.txt
+Create a requirements.txt file to manage the necessary Python packages:
+
+bash
+Copy code
+nano requirements.txt
+Add the following content:
+
+plaintext
+Copy code
+# requirements.txt
+
+# GTK+ 3.0 bindings for Python
+python3-gi
+Install the dependencies listed in requirements.txt:
+
+bash
+Copy code
+sudo apt-get update
+sudo apt-get install -y python3-gi
+5. Build and Run the Project
+Since this is a Python script, you don’t need to build it. Instead, you can run it directly:
+
+bash
+Copy code
+./soc_tool.py
+If you encounter permission issues, you might need to run the script with sudo:
+
+bash
+Copy code
+sudo ./soc_tool.py
+6. Verify Functionality
+Ensure the tool performs the following tasks:
+
+Change MAC Address: Check the change_mac_address() function.
+Clear Caches: Check the clear_caches() function.
+Update Antivirus: Ensure update_antivirus() updates ClamAV.
+Search Vulnerabilities: Test search_vulnerabilities(target) with a valid target.
+Intrusion Detection: Verify intrusion_detection() by checking Suricata logs.
+Check Uploads: Implement and test check_uploads().
+Log Management: Verify log_management() by checking log files.
+Threat Intelligence: Check threat_intelligence_integration() for data integration.
+Incident Response: Test incident_response_automation() for response actions.
+Security Event Correlation: Implement and test security_event_correlation().
+User Behavior Analytics: Implement user_behavior_analytics() for analysis.
+Backup and Recovery: Verify backup_and_recovery() for backup tasks.
+Compliance Monitoring: Check compliance_monitoring() for compliance checks.
+Security Awareness Training: Verify security_awareness_training() with the HTML file.
+7. Customization and Extensions
+You can extend the script for additional features and integrations:
+
+Integrate md5house and crackstation for Password Cracking:
+
+Use APIs or command-line tools for hash analysis and password cracking.
+Integrate Exploit Databases and Dark Web Intelligence:
+
+Fetch data from Exploit-DB and Dark Web Intelligence using their APIs or scrapers.
+Integrate with AWS, Azure, GCP:
+
+Use CLI tools or APIs for these cloud platforms:
+AWS CLI: aws configure
+Azure CLI: az login
+GCP CLI: gcloud init
+8. Troubleshooting
+Here are some common issues you might encounter and their solutions:
+
+8.1. Permissions
+Some operations require elevated privileges:
+
+bash
+Copy code
+sudo ./soc_tool.py
+8.2. Missing Dependencies
+Ensure all necessary packages are installed:
+
+bash
+Copy code
+sudo apt-get update
+sudo apt-get install -y python3-gi libgtk-3-dev clamav nmap macchanger logrotate suricata lynis
+8.3. Configuration Files
+Verify the configurations for ClamAV, Suricata, and other tools.
+
+9. Example Use Cases
+Here are some example commands and functions:
+
+Change MAC Address:
+
+python
+Copy code
+change_mac_address()
+Update Antivirus Definitions:
+
+python
+Copy code
+update_antivirus()
+Perform a Vulnerability Scan:
+
+python
+Copy code
+search_vulnerabilities('192.168.1.1')
+Intrusion Detection with Suricata:
+
+python
+Copy code
+intrusion_detection()
+10. Further Resources and Documentation
+For further assistance and learning, check the following resources:
+
+ClamAV Documentation
+Nmap Documentation
+Macchanger Documentation
+Suricata Documentation
+Lynis Documentation
+Exploit-DB
+Dark Web Intelligence
+AWS CLI Documentation
+Azure CLI Documentation
+GCP CLI Documentation
+Wireshark Documentation
+MD5 House
+Crackstation
+Dark Stack Overflow
